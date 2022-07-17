@@ -1,5 +1,7 @@
 # URLshortner
-Yet another URL shortner in Go
+A URL shorten server, which helps in shortening URL's and redirecting them.
+
+
 
 ## TODO
 - Proper Frontend UI 
