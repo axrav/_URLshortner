@@ -13,7 +13,11 @@ func Routes() *fiber.App {
 	app.Post("/short", controllers.Short)
 	app.Static("/", "./static")
 	app.Get("/+", controllers.Shortend)
-	port := fmt.Sprintf(":%s", os.Getenv("port"))
+        var port string
+        if os.Getenv("port") == ""{
+		port = ":8000"
+        } else {
+	        port = fmt.Sprintf(":%s", os.Getenv("port"))}
 	fmt.Println(port)
 	app.Listen(port)
 	return app
