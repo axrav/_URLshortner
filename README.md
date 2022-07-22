@@ -11,7 +11,7 @@ A URL shorten server, which helps in shortening URL's and redirecting them.
 
 
 ## Stack Used
-- gofiber
+- Gofiber
 - Redis Database
 - go-redis
 - godotenv
