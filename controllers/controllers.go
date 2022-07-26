@@ -40,11 +40,15 @@ func Short(c *fiber.Ctx) error {
 	}
 
 }
-func Shortend(c *fiber.Ctx) error {
+func Shortend(c *fiber.Ctx, err error) error {
+	if err != nil {
+		panic(err)
+	}
 	key := c.Params("+")
 	fmt.Println("Get rq")
 	red_url := db.GetKey(key)
 	fmt.Println("redirected")
 	fmt.Println(red_url)
 	return c.Redirect(red_url)
+
 }
