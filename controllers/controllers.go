@@ -25,8 +25,6 @@ func randomString() string {
 }
 
 func Short(c *fiber.Ctx) error {
-
-	c.Accepts("application/json; charset=utf-8")
 	body := new(rq)
 	gen_key := randomString()
 	c.BodyParser(&body)

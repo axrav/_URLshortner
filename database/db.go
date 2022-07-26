@@ -3,7 +3,6 @@ package db
 import (
 	"context"
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/go-redis/redis/v8"
@@ -35,7 +34,7 @@ func GetKey(Key string) string {
 	ctx := context.Background()
 	val, err := client.Get(ctx, Key).Result()
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	return val
 }
