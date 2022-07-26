@@ -21,16 +21,16 @@ var inp = document.getElementById("url");
             alert("You Entered an invalid URL")
             return
         }
-        fetch("/short",
-        {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-                    },
-            method: "POST",
-            body: JSON.stringify({"url" : r})
-}).then(res=> res.json()).then(function (data) { var d = JSON.parse(data)
-    document.getElementById("shortened").innerHTML = d.shortened_url
-    document.getElementById("shortened").setAttribute("href", d.shortened_url);
-})
     }
+//         fetch("/short",
+//         {
+//             headers: {
+//                 'Accept': 'application/json',
+//                 'Content-Type': 'application/json'
+//                     },
+//             method: "POST",
+//             body: JSON.stringify({"url" : r})
+// }).then(res=> res.json()).then(function (data) { var d = JSON.parse(data)
+//     document.getElementById("shortened").innerHTML = d.shortened_url
+//     document.getElementById("shortened").setAttribute("href", d.shortened_url);
+// })
