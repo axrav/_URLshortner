@@ -25,11 +25,14 @@ func randomString() string {
 }
 
 func Short(c *fiber.Ctx) error {
-	c.Accepts("application/json")
+
+	c.Accepts("application/json; charset=utf-8")
 	body := new(rq)
 	gen_key := randomString()
 	c.BodyParser(&body)
 	host := os.Getenv("host_name")
+	fmt.Println(body.URL)
+	fmt.Println("Without rq")
 	if db.Setkey(body.URL, gen_key) {
 		resp := fmt.Sprintf(`{"key" : "%s", "shortened_url" : "%s/%s"}`, gen_key, host, gen_key)
 		fmt.Printf("Request Received for URL %s, Processed Successfully!", body.URL)
