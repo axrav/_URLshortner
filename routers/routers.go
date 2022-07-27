@@ -17,7 +17,7 @@ func Routes() *fiber.App {
 	}))
 	app.Post("/short", controllers.Short)
 	app.Static("/", "./static")
-	app.Get("/+", controllers.Shortend)
+	app.Get("/:key", controllers.Shortend)
 	var port string
 	if os.Getenv("port") == "" {
 		port = ":8000"

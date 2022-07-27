@@ -36,12 +36,12 @@ func Short(c *fiber.Ctx) error {
 		fmt.Printf("Request Received for URL %s, Processed Successfully!", body.URL)
 		return c.JSON(resp)
 	} else {
-		return c.Status(500).SendString("Something went wrong!")
+		return c.Status(500).JSON(`"error" : "Something went wrong!"`)
 	}
 
 }
 func Shortend(c *fiber.Ctx) error {
-	key := c.Params("+")
+	key := c.Params("key")
 	fmt.Println("Get rq")
 	red_url := db.GetKey(key)
 	fmt.Println("redirected")
