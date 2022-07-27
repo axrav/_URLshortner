@@ -34,7 +34,7 @@ func Short(c *fiber.Ctx) error {
 	fmt.Println("Without rq")
 	if db.Setkey(body.URL, gen_key) {
 		resp := fmt.Sprintf("%s/%s", host, gen_key)
-		fmt.Printf("Request Received for URL %s, Processed Successfully!", body.URL)
+		fmt.Printf("Request Received for URL %s, Processed Successfully!\n\n", body.URL)
 		fmt.Println(resp)
 		return c.JSON(fiber.Map{"key": gen_key, "short_url": resp})
 	} else {
