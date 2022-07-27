@@ -21,7 +21,6 @@ var inp = document.getElementById("url");
             alert("You Entered an invalid URL")
             return
         }
-    }
         fetch("/short",
         {
             headers: {
@@ -34,3 +33,4 @@ var inp = document.getElementById("url");
     document.getElementById("shortened").innerHTML = d.shortened_url
     document.getElementById("shortened").setAttribute("href", d.shortened_url);
 })
+    }
