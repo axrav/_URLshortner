@@ -33,8 +33,8 @@ func GetKey(Key string) string {
 	})
 	ctx := context.Background()
 	val, err := client.Get(ctx, Key).Result()
-	if err != nil {
-		panic(err)
+	if err == redis.Nil {
+		return "No Key found"
 	}
 	return val
 }

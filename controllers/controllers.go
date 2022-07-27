@@ -42,9 +42,13 @@ func Short(c *fiber.Ctx) error {
 }
 func Shortend(c *fiber.Ctx) error {
 	key := c.Params("key")
+
 	fmt.Println("Get rq")
 	fmt.Println(key)
 	red_url := db.GetKey(key)
+	if red_url == "No Key found" {
+		return c.Status(500).JSON(`"error": "no key found"`)
+	}
 	fmt.Println("redirected")
 	fmt.Println(red_url)
 	return c.Redirect(red_url)
