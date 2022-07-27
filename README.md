@@ -4,10 +4,11 @@ A URL shorten server, which helps in shortening URL's and redirecting them.
 
 
 ## TODO
-- Proper Frontend UI 
+- Proper Frontend UI ( once i learn :P)
 - Adding more features like custom name.
 - A seperate branch for localhost db.
 - Proper commenting of codes
+- adding custom tags to shorten urls
 
 
 ## Stack Used
