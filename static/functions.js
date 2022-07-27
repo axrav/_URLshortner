@@ -31,6 +31,6 @@ var inp = document.getElementById("url");
             body: JSON.stringify({"url" : r})
 }).then(res=> res.json()).then(function (data) { var d = JSON.parse(data)
     document.getElementById("shortened").innerHTML = d.shortened_url
-    document.getElementById("shortened").setAttribute("href", d.shortened_url);
+    document.getElementById("shortened").setAttribute("href", d.short_url);
 })
     }

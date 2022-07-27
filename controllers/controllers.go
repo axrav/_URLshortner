@@ -24,32 +24,30 @@ func randomString() string {
 	return fmt.Sprintf("%x", b)[:7]
 }
 
+var host string = os.Getenv("host_name")
+
 func Short(c *fiber.Ctx) error {
 	body := new(rq)
 	gen_key := randomString()
 	c.BodyParser(&body)
-	host := os.Getenv("host_name")
 	fmt.Println(body.URL)
 	fmt.Println("Without rq")
 	if db.Setkey(body.URL, gen_key) {
-		resp := fmt.Sprintf(`{"key" : "%s", "shortened_url" : "%s/%s"}`, gen_key, host, gen_key)
+		resp := fmt.Sprintf("%s/%s", host, gen_key)
 		fmt.Printf("Request Received for URL %s, Processed Successfully!", body.URL)
-		return c.JSON(resp)
+		return c.JSON(fiber.Map{"key": gen_key, "short_url": resp})
 	} else {
-		return c.Status(500).JSON(`"error" : "Something went wrong!"`)
+		return c.Status(500).JSON(fiber.Map{"error": "Cannot Parse JSON, something went wrong"})
 	}
 
 }
-func Shortend(c *fiber.Ctx) error {
+func Redirectit(c *fiber.Ctx) error {
 	key := c.Params("key")
-
-	fmt.Println("Get rq")
 	fmt.Println(key)
 	red_url := db.GetKey(key)
 	if red_url == "No Key found" {
-		return c.Status(500).JSON(`{"error": "no key found"}`)
+		return c.Status(500).JSON(fiber.Map{"error": "Key not found"})
 	}
-	fmt.Println("redirected")
 	fmt.Println(red_url)
 	return c.Redirect(red_url)
 
