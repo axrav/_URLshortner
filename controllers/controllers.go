@@ -13,6 +13,10 @@ import (
 
 const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 
+type response struct {
+	Key string `json:"key"`
+	Url string `json:"shortened_url"`
+}
 type rq struct {
 	URL string `json:"url"`
 }
@@ -34,11 +38,11 @@ func Short(c *fiber.Ctx) error {
 	if db.Setkey(body.URL, gen_key) {
 		resp := fmt.Sprintf(`{"key" : "%s", "shortened_url" : "%s/%s"}`, gen_key, host, gen_key)
 		reformatted := fmt.Sprintf("%s/%s", host, gen_key)
-		bruh := fiber.Map{"key": gen_key, "shortened_url": reformatted}
+		bruh := response{Key: gen_key, Url: reformatted}
 		fmt.Println(bruh)
 		fmt.Printf("Request Received for URL %s, Processed Successfully!\n\n", body.URL)
 		fmt.Println(resp)
-		return c.JSON(resp)
+		return c.JSON(bruh)
 	} else {
 		return c.Status(500).JSON(fiber.Map{"error": "Cannot Parse JSON, something went wrong"})
 	}
