@@ -24,14 +24,13 @@ func randomString() string {
 	return fmt.Sprintf("%x", b)[:7]
 }
 
-var host string = os.Getenv("host_name")
-
 func Short(c *fiber.Ctx) error {
 	body := new(rq)
 	gen_key := randomString()
 	c.BodyParser(&body)
 	fmt.Println(body.URL)
 	fmt.Println("Without rq")
+	host := os.Getenv("host_name")
 	if db.Setkey(body.URL, gen_key) {
 		resp := fmt.Sprintf("%s/%s", host, gen_key)
 		fmt.Printf("Request Received for URL %s, Processed Successfully!\n\n", body.URL)
