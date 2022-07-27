@@ -43,6 +43,7 @@ func Short(c *fiber.Ctx) error {
 		fmt.Printf("Request Received for URL %s, Processed Successfully!\n\n", body.URL)
 		fmt.Println(resp)
 		return c.Status(fiber.StatusOK).JSON(bruh)
+	} else {
 		return c.Status(500).JSON(fiber.Map{"error": "Cannot Parse JSON, something went wrong"})
 	}
 
