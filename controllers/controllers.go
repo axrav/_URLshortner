@@ -35,6 +35,7 @@ func Short(c *fiber.Ctx) error {
 	if db.Setkey(body.URL, gen_key) {
 		resp := fmt.Sprintf("%s/%s", host, gen_key)
 		fmt.Printf("Request Received for URL %s, Processed Successfully!", body.URL)
+		fmt.Println(resp)
 		return c.JSON(fiber.Map{"key": gen_key, "short_url": resp})
 	} else {
 		return c.Status(500).JSON(fiber.Map{"error": "Cannot Parse JSON, something went wrong"})

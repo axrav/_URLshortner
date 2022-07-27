@@ -30,6 +30,7 @@ var inp = document.getElementById("url");
             method: "POST",
             body: JSON.stringify({"url" : r})
 }).then(res=> res.json()).then(function (data) { var d = JSON.parse(data)
+    alert(d)
     document.getElementById("shortened").innerHTML = d.short_url
     document.getElementById("shortened").setAttribute("href", d.short_url);
 })
