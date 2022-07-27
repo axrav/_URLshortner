@@ -29,9 +29,8 @@ var inp = document.getElementById("url");
                     },
             method: "POST",
             body: JSON.stringify({"url" : r})
-}).then(res=> res.json()).then(function (data) { var d = JSON.parse(data)
-    console.log(d)
-    document.getElementById("shortened").innerHTML = d.shortened_url
-    document.getElementById("shortened").setAttribute("href", d.shortened_url);
+}).then(res=> res.json()).then(function (data) {
+    document.getElementById("shortened").innerHTML = data.shortened_url
+    document.getElementById("shortened").setAttribute("href", data.shortened_url);
 })
     }
