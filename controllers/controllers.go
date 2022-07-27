@@ -36,12 +36,10 @@ func Short(c *fiber.Ctx) error {
 	fmt.Println("Without rq")
 	host := os.Getenv("host_name")
 	if db.Setkey(body.URL, gen_key) {
-		resp := fmt.Sprintf(`{"key" : "%s", "shortened_url" : "%s/%s"}`, gen_key, host, gen_key)
+		// resp := fmt.Sprintf(`{"key" : "%s", "shortened_url" : "%s/%s"}`, gen_key, host, gen_key)
 		reformatted := fmt.Sprintf("%s/%s", host, gen_key)
 		bruh := response{Key: gen_key, Url: reformatted}
-		fmt.Println(bruh)
 		fmt.Printf("Request Received for URL %s, Processed Successfully!\n\n", body.URL)
-		fmt.Println(resp)
 		return c.Status(fiber.StatusOK).JSON(bruh)
 	} else {
 		return c.Status(500).JSON(fiber.Map{"error": "Cannot Parse JSON, something went wrong"})
