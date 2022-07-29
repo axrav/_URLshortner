@@ -1,12 +1,11 @@
 package controllers
 
 import (
+	"Vegetaxd/Urlshortner/helpers"
 	"fmt"
 	"math/rand"
 	"os"
 	"time"
-
-	db "Vegetaxd/Urlshortner/database"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -35,7 +34,7 @@ func Short(c *fiber.Ctx) error {
 	fmt.Println(body.URL)
 	fmt.Println("Without rq")
 	host := os.Getenv("host_name")
-	if db.Setkey(body.URL, gen_key) {
+	if helpers.Setkey(body.URL, gen_key) {
 		// resp := fmt.Sprintf(`{"key" : "%s", "shortened_url" : "%s/%s"}`, gen_key, host, gen_key)
 		reformatted := fmt.Sprintf("%s/%s", host, gen_key)
 		bruh := response{Key: gen_key, Url: reformatted}
@@ -49,7 +48,7 @@ func Short(c *fiber.Ctx) error {
 func Redirectit(c *fiber.Ctx) error {
 	key := c.Params("key")
 	fmt.Println(key)
-	red_url := db.GetKey(key)
+	red_url := helpers.GetKey(key)
 	if red_url == "No Key found" {
 		return c.Status(500).JSON(fiber.Map{"error": "Key not found"})
 	}
