@@ -3,12 +3,21 @@ package helpers
 import (
 	"Vegetaxd/Urlshortner/database"
 	"fmt"
+	"math/rand"
+	"time"
 
 	"github.com/go-redis/redis/v8"
 )
 
-func Setkey(url string, key string) bool {
+// Generating  a random string
+func RandomString() string {
+	rand.Seed(time.Now().UnixNano())
+	b := make([]byte, 7)
+	rand.Read(b)
+	return fmt.Sprintf("%x", b)[:7]
+}
 
+func Setkey(url string, key string) bool {
 	client := database.Newdb()
 	defer client.Close()
 	ctx := database.Ctx

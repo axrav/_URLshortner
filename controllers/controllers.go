@@ -3,9 +3,7 @@ package controllers
 import (
 	"Vegetaxd/Urlshortner/helpers"
 	"fmt"
-	"math/rand"
 	"os"
-	"time"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -20,22 +18,15 @@ type rq struct {
 	URL string `json:"url"`
 }
 
-func randomString() string {
-	rand.Seed(time.Now().UnixNano())
-	b := make([]byte, 7)
-	rand.Read(b)
-	return fmt.Sprintf("%x", b)[:7]
-}
-
+// SHorten Route
 func Short(c *fiber.Ctx) error {
 	body := new(rq)
-	gen_key := randomString()
+	gen_key := helpers.RandomString()
 	c.BodyParser(&body)
 	fmt.Println(body.URL)
 	fmt.Println("Without rq")
 	host := os.Getenv("host_name")
 	if helpers.Setkey(body.URL, gen_key) {
-		// resp := fmt.Sprintf(`{"key" : "%s", "shortened_url" : "%s/%s"}`, gen_key, host, gen_key)
 		reformatted := fmt.Sprintf("%s/%s", host, gen_key)
 		bruh := response{Key: gen_key, Url: reformatted}
 		fmt.Printf("Request Received for URL %s, Processed Successfully!\n\n", body.URL)
@@ -45,6 +36,8 @@ func Short(c *fiber.Ctx) error {
 	}
 
 }
+
+// Redirect Route
 func Redirectit(c *fiber.Ctx) error {
 	key := c.Params("key")
 	fmt.Println(key)
