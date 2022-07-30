@@ -13,7 +13,7 @@ func Routes() *fiber.App {
 	app := fiber.New()
 	app.Use(cors.New(cors.Config{
 		AllowOrigins: "*",
-		AllowHeaders: "Origin, Content-Type, Accept, Authorization ",
+		AllowHeaders: "Origin,Content-Type,Accept,Authorization ",
 	}))
 	app.Post("/short", controllers.Short)
 	app.Static("/", "./static")
