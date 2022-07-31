@@ -3,7 +3,6 @@ package main
 import (
 	"Vegetaxd/Urlshortner/routers"
 	"fmt"
-
 	"github.com/joho/godotenv"
 )
 
